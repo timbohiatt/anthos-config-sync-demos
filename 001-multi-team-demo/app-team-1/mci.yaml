@@ -10,3 +10,8 @@ spec:
       backend:
         serviceName: up-and-running-mcs
         servicePort: 8080
+      rules:
+        - host: team1.gke-at-scale.com
+          backend:
+            serviceName: up-and-running-mcs
+            servicePort: 8080  
