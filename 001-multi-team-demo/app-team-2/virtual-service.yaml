@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: up-and-running
+  namespace: app-team-2
+spec: 
+  gateways:
+  - istio-system/ingress-gateway
+  hosts: 
+  - "team2.gke-at-scale.com"
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route: 
+    - destination: 
+        host: up-and-running.app-team-2.svc.cluster.local
+        port: 
+          number: 8080
