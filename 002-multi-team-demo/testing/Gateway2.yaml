@@ -1,0 +1,39 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: app-team-1-gateway
+  namespace: app-team-1
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 8080
+      name: http
+      protocol: HTTP
+    hosts:
+    - team1.gke-at-scale.com
+    #tls:
+    #  mode: SIMPLE
+    #  credentialName: ext-host-cert  # Kubernetes Secret name
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: app-team-1-ingress
+  namespace: app-team-1
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - app-team-1-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+      - destination:
+          host: up-and-running.app-team-1.svc.cluster.local
+          port:
+            number: 8080
