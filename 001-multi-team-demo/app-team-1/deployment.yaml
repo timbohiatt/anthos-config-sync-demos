@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: up-and-running-app
+  namespace: app-team-1
+  labels:
+    app: up-and-running-app
+spec:
+  selector:
+    matchLabels:
+      app: up-and-running-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: up-and-running-app
+    spec:
+      containers:
+      - name: up-and-running-app
+        image: europe-docker.pkg.dev/thiatt-manual-020/showcase-containers/001-up-and-running:test-v007
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: CUSTOMER
+          value: "Some Person!"
+        - name: COLOR_PRIMARY
+          value: "#000000"
+        - name: COLOR_SECONDARY
+          value: "#5f5f61"
+        - name: COLOR_BACKGROUND
+          value: "#FFFFFF"
+        - name: LOCATION
+          value: "Google Cloud"
+        - name: PLATFORM
+          value: "GKE Autopilot"

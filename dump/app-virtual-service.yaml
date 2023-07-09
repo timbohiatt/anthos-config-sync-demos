@@ -1,0 +1,17 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: up-and-running-virtual-service
+  namespace: test-zone
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - asm-ingress/asm-ingressgateway
+  http:
+  - route:
+    - destination:
+        host: up-and-running-service
+        port:
+          number: 80  
